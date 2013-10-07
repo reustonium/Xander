@@ -20,6 +20,7 @@ package  {
 		public var canJump:Boolean;
 		public var fillJumpMeter:Boolean;
 		public var jumpPower:Number;
+		public var slowdownFrames:Number;
 		
 		
 		public function Player() {
@@ -36,6 +37,7 @@ package  {
 			canJump = true;
 			fillJumpMeter = false;
 			jumpPower = 0;
+			slowdownFrames = 0;
 		}
 		
 		override public function update():void {
@@ -54,7 +56,6 @@ package  {
 			if (fillJumpMeter) {
 				if (Input.check(Key.SPACE)) {
 					jumpPower -= 60;
-					trace("Spacebar Down");
 				}
 								
 				if (Input.released(Key.SPACE)) {
@@ -69,6 +70,21 @@ package  {
 				}
 			}
 			
+			var c:Clock = collide("clock", x, y) as Clock;
+			if (c) {	
+				c.y = FP.rand(250) + 80;
+				c.moveBy(FP.rand(250) + 800, 0);
+				c.setSpeed(Math.floor(FP.rand(4) - 2));
+				trace('hit clock');
+				slowdownFrames = 60;
+			}
+			
+			if (slowdownFrames > 0) {
+				speed -= 1;
+				slowdownFrames--;
+			}
+			
+			
 			applyPhysics();
 		}
 		
@@ -79,7 +95,6 @@ package  {
 				this.y = 330;
 				yVel = 0;
 			}
-
 		}
 		
 	}
