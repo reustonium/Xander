@@ -84,7 +84,6 @@ package  {
 				slowdownFrames--;
 			}
 			
-			
 			applyPhysics();
 		}
 		
