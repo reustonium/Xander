@@ -15,6 +15,13 @@ package  {
 		public var jumpTime:Number;
 		public var sSinceLastJump:Number;
 		
+		public var yVel:Number;
+		public var gravity:Number;
+		public var canJump:Boolean;
+		public var fillJumpMeter:Boolean;
+		public var jumpPower:Number;
+		
+		
 		public function Player() {
 			sprite = new Image(Assets.PLAYER);
 			addGraphic(sprite)
@@ -23,19 +30,56 @@ package  {
 			
 			setHitbox(64, 64);
 			type = "player";
+			
+			yVel = 0;
+			gravity = 1080;
+			canJump = true;
+			fillJumpMeter = false;
+			jumpPower = 0;
 		}
 		
 		override public function update():void {
 			super.update();
 			this.x += FP.elapsed * speed;
-			speed++;
+			speed += 0.5;
 			
-			if (Input.check(Key.SPACE)) {
-				this.y -= 10;
+			(this.y < 280) ? canJump=false : canJump= true;
+			
+			if (Input.pressed(Key.SPACE) && canJump) {
+				jumpPower = 0;
+				fillJumpMeter = true;
+				trace("Spacebar Pressed");
 			}
 			
+			if (fillJumpMeter) {
+				if (Input.check(Key.SPACE)) {
+					jumpPower -= 60;
+					trace("Spacebar Down");
+				}
+								
+				if (Input.released(Key.SPACE)) {
+					trace("Spacebar Released");
+					if (jumpPower < -800) {
+						jumpPower = -800;
+					}
+					trace(jumpPower);
+					yVel = jumpPower;
+					fillJumpMeter = false;
+					canJump = false;
+				}
+			}
 			
-			sSinceLastJump += FP.elapsed;
+			applyPhysics();
+		}
+		
+		private function applyPhysics():void {
+			this.y += yVel * FP.elapsed;
+			yVel += gravity * FP.elapsed;
+			if (this.y > 330) {
+				this.y = 330;
+				yVel = 0;
+			}
+
 		}
 		
 	}
