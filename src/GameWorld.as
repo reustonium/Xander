@@ -3,6 +3,9 @@ package  {
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
+	import com.newgrounds.API;
+	import com.newgrounds.components.MedalPopup;
+	import com.newgrounds.Medal;
 	/**
 	 * ...
 	 * @author reustonium
@@ -15,6 +18,7 @@ package  {
 		public var score:int;
 		public var scoreLabel:Text;
 		public var scoreLabelUnits:Text;
+		public var newbieMPU:MedalPopup;
 		
 		public function GameWorld() {
 			bg = new Backdrop(Assets.BG, true, false);
@@ -41,6 +45,9 @@ package  {
 			scoreLabelUnits.align = "right";
 			addGraphic(scoreLabel);
 			addGraphic(scoreLabelUnits);
+			
+			newbieMPU = new MedalPopup();
+			FP.stage.addChild(newbieMPU);
 		}
 		
 		override public function update():void {
@@ -65,6 +72,11 @@ package  {
 				clock.y = FP.rand(250) + 80;
 				clock.moveBy(FP.rand(250) + 800, 0);
 				clock.setSpeed(Math.floor(FP.rand(6) - 3));
+			}
+			
+			if (score > 1000) {
+				API.unlockMedal("Newbie");
+				
 			}
 		}
 		

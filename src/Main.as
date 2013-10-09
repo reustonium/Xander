@@ -1,7 +1,10 @@
 package 
 {
+	import com.newgrounds.APIConnection;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
+	import com.newgrounds.API;
+	import com.newgrounds.APIEvent;
 
 	/**
 	 * ...
@@ -19,8 +22,18 @@ package
 			FP.console.enable();
 			
 			//TODO: Add Newgrounds Init Code
+			API.addEventListener(APIEvent.API_CONNECTED, onAPIConnected);
+			API.connect(root, NG.NGAPI, NG.NGKEY);
 			
 			FP.world = new GameWorld();
+		}
+		
+		public function onAPIConnected(event:APIEvent):void {
+			if(event.success){
+				trace("Connected to NG API");
+			} else {
+				trace("NG API Error: " + event.error);
+			}
 		}
 	}
 	

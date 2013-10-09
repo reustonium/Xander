@@ -12,7 +12,7 @@ package  {
 		public function Clock(_speed:int) {
 			speed = _speed;
 			addGraphic(new Image(Assets.CLOCK));
-			setHitbox(80, 80);
+			setHitbox(64, 64);
 			type = "clock";
 		}
 		
