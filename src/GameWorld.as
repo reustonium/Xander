@@ -1,4 +1,5 @@
 package  {
+	import com.newgrounds.components.FlashAd;
 	import net.flashpunk.graphics.Backdrop;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
@@ -47,7 +48,7 @@ package  {
 			addGraphic(scoreLabelUnits);
 			
 			newbieMPU = new MedalPopup();
-			FP.stage.addChild(newbieMPU);
+			FP.stage.addChild(newbieMPU);	
 		}
 		
 		override public function update():void {
@@ -76,7 +77,6 @@ package  {
 			
 			if (score > 1000) {
 				API.unlockMedal("Newbie");
-				
 			}
 		}
 		

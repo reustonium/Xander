@@ -23,14 +23,14 @@ package
 			
 			//TODO: Add Newgrounds Init Code
 			API.addEventListener(APIEvent.API_CONNECTED, onAPIConnected);
-			API.connect(root, NG.NGAPI, NG.NGKEY);
-			
-			FP.world = new GameWorld();
+			API.connect(root, NG.NGAPI, NG.NGKEY);			
 		}
 		
 		public function onAPIConnected(event:APIEvent):void {
 			if(event.success){
 				trace("Connected to NG API");
+				FP.world = new GameWorld();
+				trace(API.username);
 			} else {
 				trace("NG API Error: " + event.error);
 			}
