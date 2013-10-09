@@ -20,7 +20,7 @@ package  {
 		public var canJump:Boolean;
 		public var fillJumpMeter:Boolean;
 		public var jumpPower:Number;
-		public var slowdownFrames:Number;
+		public var slowdownTime:Number;
 		
 		
 		public function Player() {
@@ -33,11 +33,11 @@ package  {
 			type = "player";
 			
 			yVel = 0;
-			gravity = 1080;
+			gravity = 1280;
 			canJump = true;
 			fillJumpMeter = false;
 			jumpPower = 0;
-			slowdownFrames = 0;
+			slowdownTime = 0;
 		}
 		
 		override public function update():void {
@@ -74,14 +74,14 @@ package  {
 			if (c) {	
 				c.y = FP.rand(250) + 80;
 				c.moveBy(FP.rand(250) + 800, 0);
-				c.setSpeed(Math.floor(FP.rand(4) - 2));
+				c.setSpeed(Math.floor(FP.rand(6) - 3));
 				trace('hit clock');
-				slowdownFrames = 60;
+				slowdownTime = 0.5;
 			}
 			
-			if (slowdownFrames > 0) {
-				speed -= 1;
-				slowdownFrames--;
+			if (slowdownTime > 0) {
+				speed -= 100 * FP.elapsed;
+				slowdownTime -=FP.elapsed;
 			}
 			
 			applyPhysics();

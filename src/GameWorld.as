@@ -19,7 +19,7 @@ package  {
 		public function GameWorld() {
 			bg = new Backdrop(Assets.BG, true, false);
 			bg1 = new Backdrop(Assets.BG1, true, false);
-			bg1.scrollX = 0.5;
+			bg1.scrollX = 0.8;
 			
 			addGraphic(bg);
 			addGraphic(bg1);
@@ -49,7 +49,7 @@ package  {
 			FP.camera.x = player.x - 150;
 			score = player.x;
 			if (score >= 1000) {
-				scoreLabel.text = (score / 1000).toFixed(3);
+				scoreLabel.text = (score / 1000).toFixed(1);
 				scoreLabelUnits.text = "km";
 				scoreLabel.x = player.x - 120;
 				scoreLabelUnits.x = player.x - 110;
@@ -64,7 +64,7 @@ package  {
 			if (player.x - clock.x > 150) {
 				clock.y = FP.rand(250) + 80;
 				clock.moveBy(FP.rand(250) + 800, 0);
-				clock.setSpeed(Math.floor(FP.rand(4) - 2));
+				clock.setSpeed(Math.floor(FP.rand(6) - 3));
 			}
 		}
 		

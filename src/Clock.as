@@ -17,10 +17,10 @@ package  {
 		}
 		
 		public function setSpeed(_speed:int):void {
-			if (_speed < -2) {
-				speed = -2;
-			} else if (_speed > 2) {
-				speed = 2;
+			if (_speed < -3) {
+				speed = -3;
+			} else if (_speed > 3) {
+				speed = 3;
 			}
 			else { 
 				speed = _speed;
